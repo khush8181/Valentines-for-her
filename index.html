@@ -12,7 +12,7 @@ body {
   color: white;
   text-align: center;
   overflow-x: hidden;
-  transition: 1s;
+  transition: background 1.5s ease;
 }
 
 .section {
@@ -44,31 +44,32 @@ input {
   position: absolute;
 }
 
-.fade-bg {
+.fade-dark {
   background: black !important;
 }
 
-.typewriter {
-  border-right: 2px solid white;
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typing 4s steps(40, end), blink .8s infinite;
+.glow {
+  font-size: 40px;
+  text-shadow: 0 0 10px pink, 0 0 20px red, 0 0 30px white;
 }
 
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 20px;
+  animation: floatUp 5s linear infinite;
+  opacity: 0.8;
 }
 
-@keyframes blink {
-  50% { border-color: transparent }
+@keyframes floatUp {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100vh); }
 }
 </style>
 </head>
 <body>
 
-<!-- Hidden YouTube Player -->
+<!-- Hidden YouTube -->
 <iframe 
   id="ytPlayer"
   width="0"
@@ -145,13 +146,15 @@ input {
 
 <!-- FINAL -->
 <div id="final" class="section">
-  <h1>Karina ❤️</h1>
-  <p class="typewriter">
-  From 8th September 2024 at 2 Garville Mews…<br>
+  <h1 class="glow">Karina ❤️</h1>
+  <p>
+  From 8th September 2024 at 2 Garville Mews…<br><br>
   Every puzzle led back to you.<br>
   Every answer was always you.<br>
   And every future I imagine… has you in it.
   </p>
+
+  <button onclick="playMusic()">🎵 Play Our Song</button>
 
   <h2>Will you stay mine forever? 💍</h2>
 
@@ -193,14 +196,17 @@ function checkQuiz() {
 function checkCode() {
   let code = document.getElementById("secretCode").value;
   if (code === "19/07/2025") {
-    document.body.classList.add("fade-bg");
+    document.body.classList.add("fade-dark");
     showSection("final");
-
-    let player = document.getElementById("ytPlayer");
-    player.src += "&autoplay=1";
+    startHearts();
   } else {
     document.getElementById("codeMsg").innerText = "Not quite 😌 think carefully.";
   }
+}
+
+function playMusic() {
+  let player = document.getElementById("ytPlayer");
+  player.src += "&autoplay=1";
 }
 
 function sayYes() {
@@ -214,6 +220,21 @@ noBtn.addEventListener("mouseover", function() {
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 });
+
+function startHearts() {
+  setInterval(() => {
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 20 + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 5000);
+  }, 300);
+}
 
 </script>
 
