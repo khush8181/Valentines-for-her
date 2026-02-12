@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Only For Karina ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #ff758c, #ff7eb3);
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+  transition: 1s;
+}
+
+.section {
+  display: none;
+  padding: 50px 20px;
+}
+
+.active {
+  display: block;
+}
+
+button {
+  padding: 12px 20px;
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+input {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+}
+
+#noBtn {
+  position: absolute;
+}
+
+.fade-bg {
+  background: black !important;
+}
+
+.typewriter {
+  border-right: 2px solid white;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 4s steps(40, end), blink .8s infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  50% { border-color: transparent }
+}
+</style>
+</head>
+<body>
+
+<!-- Hidden YouTube Player -->
+<iframe 
+  id="ytPlayer"
+  width="0"
+  height="0"
+  src="https://www.youtube.com/embed/KUpwupYj_tY?enablejsapi=1"
+  frameborder="0"
+  allow="autoplay">
+</iframe>
+
+<!-- WELCOME -->
+<div id="welcome" class="section active">
+  <h1>🔐 Welcome Karina ❤️</h1>
+  <p>Only the girl who changed my life on 8th September 2024 can unlock this.</p>
+  <button onclick="showSection('riddle')">Start the Love Challenge 💕</button>
+</div>
+
+<!-- RIDDLE -->
+<div id="riddle" class="section">
+  <h2>Stage 1: Prove It’s You 😌</h2>
+  <p>
+  I don’t beat unless you’re near.<br>
+  I race when you smile.<br>
+  I belong to you, even though it’s inside me.<br>
+  What am I?
+  </p>
+  <input id="riddleAnswer" placeholder="Type your answer">
+  <br><br>
+  <button onclick="checkRiddle()">Submit</button>
+  <p id="riddleMsg"></p>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz" class="section">
+  <h2>Stage 2: The Love Quiz 💞</h2>
+
+  <p><b>1. When did we first meet?</b></p>
+  <button onclick="answer(true)">8th September 2024</button>
+  <button onclick="answer(false)">2nd September 2024</button>
+  <button onclick="answer(false)">5th September 2024</button>
+  <button onclick="answer(false)">14th September 2024</button>
+
+  <p><b>2. At Garville Mews, which song did you sing that stole my heart?</b></p>
+  <button onclick="answer(false)">Ek sone jo rupyo</button>
+  <button onclick="answer(true)">Hojmalo</button>
+  <button onclick="answer(false)">Baarishien</button>
+  <button onclick="answer(false)">Dooron dooron</button>
+
+  <p><b>3. What’s my favourite thing about you?</b></p>
+  <button onclick="answer(false)">Your smile</button>
+  <button onclick="answer(false)">Your dramatic innocence</button>
+  <button onclick="answer(false)">How deeply you care</button>
+  <button onclick="answer(true)">All of the above</button>
+
+  <p><b>4. Our anniversary month?</b></p>
+  <button onclick="answer(false)">June</button>
+  <button onclick="answer(true)">July</button>
+  <button onclick="answer(false)">August</button>
+  <button onclick="answer(false)">December</button>
+
+  <br><br>
+  <button onclick="checkQuiz()">Submit Quiz 💕</button>
+  <p id="quizMsg"></p>
+</div>
+
+<!-- SECRET CODE -->
+<div id="code" class="section">
+  <h2>Final Lock 🔐</h2>
+  <p>Enter the date that made it official.</p>
+  <input id="secretCode" placeholder="DD/MM/YYYY">
+  <br><br>
+  <button onclick="checkCode()">Unlock ❤️</button>
+  <p id="codeMsg"></p>
+</div>
+
+<!-- FINAL -->
+<div id="final" class="section">
+  <h1>Karina ❤️</h1>
+  <p class="typewriter">
+  From 8th September 2024 at 2 Garville Mews…<br>
+  Every puzzle led back to you.<br>
+  Every answer was always you.<br>
+  And every future I imagine… has you in it.
+  </p>
+
+  <h2>Will you stay mine forever? 💍</h2>
+
+  <button onclick="sayYes()">YES 💖</button>
+  <button id="noBtn">NO 😈</button>
+</div>
+
+<script>
+
+let score = 0;
+
+function showSection(id) {
+  document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function checkRiddle() {
+  let ans = document.getElementById("riddleAnswer").value.toLowerCase();
+  if (ans === "heart") {
+    showSection("quiz");
+  } else {
+    document.getElementById("riddleMsg").innerText = "Nice try Karinaaa 😏 think romantic.";
+  }
+}
+
+function answer(correct) {
+  if (correct) score++;
+}
+
+function checkQuiz() {
+  if (score >= 3) {
+    showSection("code");
+  } else {
+    document.getElementById("quizMsg").innerText = "Karinaaa you need revision 😏";
+  }
+  score = 0;
+}
+
+function checkCode() {
+  let code = document.getElementById("secretCode").value;
+  if (code === "19/07/2025") {
+    document.body.classList.add("fade-bg");
+    showSection("final");
+
+    let player = document.getElementById("ytPlayer");
+    player.src += "&autoplay=1";
+  } else {
+    document.getElementById("codeMsg").innerText = "Not quite 😌 think carefully.";
+  }
+}
+
+function sayYes() {
+  alert("Smartest decision you’ve ever made 😌❤️");
+}
+
+let noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", function() {
+  let x = Math.random() * (window.innerWidth - 100);
+  let y = Math.random() * (window.innerHeight - 50);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
+
+</script>
+
+</body>
+</html>
